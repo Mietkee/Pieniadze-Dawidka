@@ -3,6 +3,7 @@ let pluginStealth = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(pluginStealth());
 puppeteer = require('puppeteer')
 
+let otwarteSkrzynki = [];
 let siano = [];
 let pieniadze = [];
 let zGrade = [];
@@ -72,7 +73,7 @@ let skrzynki = [
     ["MILSPEC", 0.30],
     ["RESTRICTED", 1.90],
     ["COVERT", 6.90]];
-console.log(skrzynki[0][1]);
+//console.log(skrzynki[0][1]);
 
 
 async function hajsDawidka(url) {
@@ -95,13 +96,18 @@ async function hajsDawidka(url) {
          const grade = await el3.getProperty('textContent');
          let wGrade = await grade.jsonValue();
          zGrade.push(wGrade);
-         console.log(zGrade);
+         //console.log(zGrade);
 
-
+         for (let j = 1; j < 66; j++) {
+             if (zGrade == skrzynki[j - 1][0]) {
+                 otwarteSkrzynki.push(skrzynki[j - 1][1]);
+                 console.log(otwarteSkrzynki)
+             }
+         }
+        
 
          if (siano[i - 1] == 'Received' || siano[i - 1] == "Sold") {
              //Wpisanie ceny poszczególnego skina 
-             //await page.waitForXPath("/html/body/main/div/section/ul/li[" + i + "]/div/div[2]/div[2]");
              const [el] = await page.$x("/html/body/main/div/section/ul/li[" + i + "]/div/div[2]/div[2]");
              const txt = await el.getProperty('textContent');
              let rawTxt = await txt.jsonValue();
@@ -120,15 +126,14 @@ async function hajsDawidka(url) {
                  window.scrollBy(0, 150);
              });
          }
-         
-     } 
+        }
      
      //Obilacznie całości wyjebanego hajsu 
      let cwel = pieniadze.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
      cwel = cwel * 3.71;
      console.log(cwel.toFixed(2));
 
-    browser.close();
+    //browser.close();
 }
 
 hajsDawidka("https://key-drop.com/pl/user/profile/76561199057737681")
