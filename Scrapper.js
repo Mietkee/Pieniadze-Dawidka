@@ -125,15 +125,16 @@ async function hajsDawidka(url) {
              });
          }
         }
-     //Obliczanie Cen Skrzynek
-    let chuj = otwarteSkrzynki.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
-    chuj = chuj * 3.71
-    console.log("Dawidek Otworzył Skrzynki za " + chuj.toFixed(2) + " PLN");
 
-     //Obilacznie całości wyjebanego hajsu 
+    //Obilacznie całości wyjebanego hajsu 
      let cwel = pieniadze.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
      cwel = cwel * 3.71;
      console.log("Dawidek Wyjebał " + cwel.toFixed(2) + " PLN");
+     
+     //Obliczanie Cen Skrzynek
+    let chuj = otwarteSkrzynki.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
+    chuj = chuj * 3.71
+    console.log("Dawidek Zarobił " + chuj.toFixed(2) + " PLN");
 
      //Obliczanie na Plus
      let pizda = chuj - cwel;
