@@ -73,10 +73,10 @@ let skrzynki = [
     ["MILSPEC", 0.30],
     ["RESTRICTED", 1.90],
     ["COVERT", 6.90]];
-//console.log(skrzynki[0][1]);
 
 
 async function hajsDawidka(url) {
+
      const browser = await puppeteer.launch({headless: false});
      const page = await browser.newPage();
      await page.goto(url);
@@ -89,19 +89,17 @@ async function hajsDawidka(url) {
          const src = await el2.getProperty('textContent');
          let srcTxt = await src.jsonValue();
          siano.push(srcTxt);  //kocham cie dziala
-         //console.log(siano);
 
          //Sprawdzenie jaka to skrzynka
          const [el3] = await page.$x("/html/body/main/div/section/ul/li["+ i +"]/div/div[3]/div[1]/a");
          const grade = await el3.getProperty('textContent');
          let wGrade = await grade.jsonValue();
          zGrade.push(wGrade);
-         //console.log(zGrade);
 
          for (let j = 1; j < 66; j++) {
-             if (zGrade == skrzynki[j - 1][0]) {
+             if (zGrade[i - 1] == skrzynki[j - 1][0]) {
                  otwarteSkrzynki.push(skrzynki[j - 1][1]);
-                 console.log(otwarteSkrzynki)
+                 //console.log(otwarteSkrzynki)
              }
          }
         
@@ -121,19 +119,26 @@ async function hajsDawidka(url) {
              });
          }
          else {
-             console.log("jestem jebanym debilem");
+             //console.log("jestem jebanym debilem");
              await page.evaluate(_ => {
                  window.scrollBy(0, 150);
              });
          }
         }
-     
+     //Obliczanie Cen Skrzynek
+    let chuj = otwarteSkrzynki.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
+    chuj = chuj * 3.71
+    console.log("Dawidek Otworzył Skrzynki za " + chuj.toFixed(2) + " PLN");
+
      //Obilacznie całości wyjebanego hajsu 
      let cwel = pieniadze.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
      cwel = cwel * 3.71;
-     console.log(cwel.toFixed(2));
+     console.log("Dawidek Wyjebał " + cwel.toFixed(2) + " PLN");
 
-    //browser.close();
+     //Obliczanie na Plus
+     let pizda = chuj - cwel;
+     console.log("Dawidek jest na plusie " + pizda.toFixed(2) + " PLN");
+    browser.close();
 }
 
 hajsDawidka("https://key-drop.com/pl/user/profile/76561199057737681")
