@@ -119,14 +119,14 @@ async function hajsDawidka(url) {
              });
          }
          else {
-             //console.log("jestem jebanym debilem");
+             //console.log("is it working?");
              await page.evaluate(_ => {
                  window.scrollBy(0, 150);
              });
          }
         }
 
-    //Obilacznie całości wyjebanego hajsu 
+    //Obilacznie całości wydanego hajsu 
      let wholeMoney = pieniadze.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
      wholeMoney = wholeMoney * 3.71;
      console.log("Dawidek Wydał " + wholeMoney.toFixed(2) + " PLN");
