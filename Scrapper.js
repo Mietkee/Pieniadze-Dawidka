@@ -127,18 +127,18 @@ async function hajsDawidka(url) {
         }
 
     //Obilacznie całości wyjebanego hajsu 
-     let cwel = pieniadze.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
-     cwel = cwel * 3.71;
-     console.log("Dawidek Wyjebał " + cwel.toFixed(2) + " PLN");
+     let wholeMoney = pieniadze.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
+     wholeMoney = wholeMoney * 3.71;
+     console.log("Dawidek Wydał " + wholeMoney.toFixed(2) + " PLN");
      
      //Obliczanie Cen Skrzynek
-    let chuj = otwarteSkrzynki.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
-    chuj = chuj * 3.71
-    console.log("Dawidek Zarobił " + chuj.toFixed(2) + " PLN");
+    let boxValue = otwarteSkrzynki.reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
+    boxValue = boxValue * 3.71
+    console.log("Dawidek Zarobił " + boxValue.toFixed(2) + " PLN");
 
      //Obliczanie na Plus
-     let pizda = chuj - cwel;
-     console.log("Dawidek jest na plusie " + pizda.toFixed(2) + " PLN");
+     let balance = boxValue - wholeMoney;
+     console.log("Dawidek jest na plusie " + balance.toFixed(2) + " PLN");
     browser.close();
 }
 
